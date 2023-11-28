@@ -30,12 +30,6 @@ class PictureViewer():
             print("Sorry, but I am unable to open a window withough choosing the folder.")
         else:
             self.show_picture()
-
-    def load_image(self, filename):
-        self.image = Image.open(filename)
-        self.image = self.image.resize([int(self.image.width/2), int(self.image.height/2)])
-        photo = ImageTk.PhotoImage(self.image)
-        return photo
     
     def show_picture(self, directory='./'):
         root = tk.Tk()
@@ -44,7 +38,7 @@ class PictureViewer():
         if directory != './':
             self.dir = directory
 
-        self.picture = os.listdir(self.dir)
+        self.picture = [item for item in os.listdir(self.dir) if item.endswith('.png') or item.endswith('.jpeg') or item.endswith('.jpg') or item.endswith('.webm')]
         self.choiceButton = 0
         
         image_path = self.dir + '/' + self.picture[self.choiceButton]
